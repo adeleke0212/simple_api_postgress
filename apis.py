@@ -117,11 +117,7 @@ def loadJsonFile():
     f.close()
     return celebrity_data
 
-# first you open the file, load it and then close the file
 
-# json dump into a file
-
-# we returned a celeb_json as our api response and we dump the json as a file in myfile.json
 
 
 @app.route('/fetchHomeDump', methods=['GET'])
@@ -130,8 +126,6 @@ def read_artistsDump():
     cursor = connection.cursor()
     select = """select celebrity_name, genre from celebrity"""
     celeb_df = pd.read_sql(select, con=connection)
-    # Just trying out if we are not converting to df and then we want to dump to json file
-    # Celeb_df.to_json(and passing the file path in quote) will give us the json file here
     celeb_json = celeb_df.to_json(orient="index")
     out_file = open("myfile.json", "w")  # w = write to file
     # or with open("myfile.json", "w") as outfile
